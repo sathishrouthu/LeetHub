@@ -13,8 +13,7 @@ public:
                     sum += arr[k];
                     sum += arr[l];
                     if(sum==target){
-                        vector<int> v = { arr[i],arr[j],arr[k],arr[l] };
-                        ans.push_back(v);
+                        ans.push_back({ arr[i],arr[j],arr[k],arr[l] });
                         k++;
                         l--;
                         while(k<l && arr[k]==arr[k-1]) k++;
