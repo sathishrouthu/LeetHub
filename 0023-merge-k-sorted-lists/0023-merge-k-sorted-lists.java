@@ -29,15 +29,16 @@ class Solution {
         }
         return res;
     }
+    public ListNode util(ListNode[] lists,int start,int end){
+        if(start==end) return lists[start];
+        int mid = (start+end)/2;
+        ListNode left = util(lists,start,mid);
+        ListNode right = util(lists,mid+1,end);
+        return mergeLists(left,right);
+    }
     public ListNode mergeKLists(ListNode[] lists) {
         int n = lists.length;
         if(n==0) return null;
-        int i=1;
-        while(i<n){
-            // merge two lists
-            lists[i] = mergeLists(lists[i],lists[i-1]);
-            i++;
-        }
-        return lists[n-1];
+        return util(lists,0,n-1);
     }
 }
