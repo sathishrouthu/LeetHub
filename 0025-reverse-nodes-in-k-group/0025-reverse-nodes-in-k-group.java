@@ -9,27 +9,28 @@
  * }
  */
 class Solution {
-    public void reverseList(ListNode s,ListNode e){
-        ListNode pre = null,curr=s,nex = null;
-        while(curr!=e){
+    public void reverseList(ListNode start,ListNode end){
+        ListNode curr = start;
+        ListNode prev = null;
+        ListNode nex  = null;
+        while(curr!=end){
             nex = curr.next;
-            curr.next = pre;
-            pre = curr;
+            curr.next = prev;
+            prev = curr;
             curr = nex;
         }
-        curr.next = pre;
+        curr.next=prev;
     }
     public ListNode reverseKGroup(ListNode head, int k) {
-        // if(head==null || head.next==null || k==1) return head;
-        ListNode dummyHead = new ListNode(-1);
-        dummyHead.next = head;
+        if(head==null || head.next==null || k==1) return head;
+        ListNode dummyHead = new ListNode(0,head);
         ListNode beforeStart = dummyHead;
-        int i=0;
         ListNode end = head;
+        int i=0;
         while(end!=null){
             i++;
             if(i%k==0){
-                ListNode start    = beforeStart.next;
+                ListNode start = beforeStart.next;
                 ListNode afterEnd = end.next;
                 reverseList(start,end);
                 beforeStart.next = end;
@@ -37,9 +38,8 @@ class Solution {
                 beforeStart = start;
                 end = afterEnd;
             }
-            else{
-                end=end.next;
-            }
+            else
+                end = end.next;
         }
         return dummyHead.next;
     }
