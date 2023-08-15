@@ -20,7 +20,7 @@ class Solution {
         curr.next = pre;
     }
     public ListNode reverseKGroup(ListNode head, int k) {
-        if(head==null || head.next==null || k==1) return head;
+        // if(head==null || head.next==null || k==1) return head;
         ListNode dummyHead = new ListNode(-1);
         dummyHead.next = head;
         ListNode beforeStart = dummyHead;
