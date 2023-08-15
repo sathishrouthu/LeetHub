@@ -21,16 +21,26 @@ class Solution {
     }
     public ListNode reverseKGroup(ListNode head, int k) {
         if(head==null || head.next==null || k==1) return head;
-        ListNode s = head, e = head;
-        int i = k-1;
-        while(i!=0){
-            e=e.next;
-            if(e==null) return head;
-            i--;
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+        ListNode beforeStart = dummyHead;
+        int i=0;
+        ListNode end = head;
+        while(end!=null){
+            i++;
+            if(i%k==0){
+                ListNode start    = beforeStart.next;
+                ListNode afterEnd = end.next;
+                reverseList(start,end);
+                beforeStart.next = end;
+                start.next = afterEnd;
+                beforeStart = start;
+                end = afterEnd;
+            }
+            else{
+                end=end.next;
+            }
         }
-        ListNode rest = reverseKGroup(e.next,k);
-        reverseList(s,e);
-        s.next = rest;
-        return e;
+        return dummyHead.next;
     }
 }
