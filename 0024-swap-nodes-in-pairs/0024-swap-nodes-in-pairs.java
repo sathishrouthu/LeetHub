@@ -25,6 +25,7 @@ class Solution {
             prevIter = node1;
             iter = node1.next;
         }
+        System.gc();
         return res;
     }
 }
