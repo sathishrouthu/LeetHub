@@ -11,11 +11,20 @@
 class Solution {
     public ListNode swapPairs(ListNode head) {
         if(head==null || head.next==null) return head;
-        ListNode node1 = head;
-        ListNode node2 = head.next;
-        ListNode rem = swapPairs(node2.next);
-        node2.next = node1;
-        node1.next = rem;
-        return node2;
+        
+        ListNode iter = head;
+        ListNode res = head.next;
+        ListNode prevIter = null;
+        while(iter!=null && iter.next!=null){
+            ListNode node1 = iter;
+            ListNode node2 = iter.next;
+            node1.next = node2.next;
+            node2.next = node1;
+            
+            if(prevIter!=null) prevIter.next = node2;
+            prevIter = node1;
+            iter = node1.next;
+        }
+        return res;
     }
 }
