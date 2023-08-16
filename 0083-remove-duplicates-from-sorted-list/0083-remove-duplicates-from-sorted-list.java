@@ -19,6 +19,7 @@ class Solution {
             iter.next = temp;
             iter = temp;
         }
+        System.gc();
         return head;
     }
 }
