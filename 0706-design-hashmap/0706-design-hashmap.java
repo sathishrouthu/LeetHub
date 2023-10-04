@@ -9,7 +9,7 @@ class ListNode{
 }    
 class MyHashMap {
     final static int size = 19997;
-    final static int prime = 6291469;
+    final static int prime = 12582917;
     ListNode[] data;
     
     public MyHashMap() {
