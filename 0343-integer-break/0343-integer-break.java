@@ -15,10 +15,11 @@ class Solution {
         dp[2]=2;
         dp[3]=3;
         for(int num=4;num<=n;num++){
-            dp[num]=num;
+            int ans=num;
             for(int j=2;j<=num;j++){
-                dp[num]=Math.max(dp[num],j*dp[num-j]);
+                ans=Math.max(ans,j*dp[num-j]);
             }
+            dp[num]=ans;
         }
         return dp[n];
     }
