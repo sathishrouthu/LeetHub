@@ -11,7 +11,15 @@ class Solution {
     public int integerBreak(int n) {
         if(n<=3) return n-1;
         int[] dp = new int[n+1];
-        Arrays.fill(dp,-1);
-        return f(n,dp);
+        dp[1]=1;
+        dp[2]=2;
+        dp[3]=3;
+        for(int num=4;num<=n;num++){
+            dp[num]=num;
+            for(int j=2;j<=num;j++){
+                dp[num]=Math.max(dp[num],j*dp[num-j]);
+            }
+        }
+        return dp[n];
     }
 }
