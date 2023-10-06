@@ -10,17 +10,8 @@ class Solution {
     // }
     public int integerBreak(int n) {
         if(n<=3) return n-1;
-        int[] dp = new int[n+1];
-        dp[1]=1;
-        dp[2]=2;
-        dp[3]=3;
-        for(int num=4;num<=n;num++){
-            int ans=num;
-            for(int j=2;j<=num;j++){
-                ans=Math.max(ans,j*dp[num-j]);
-            }
-            dp[num]=ans;
-        }
-        return dp[n];
+        if(n%3==0) return (int) Math.pow(3,n/3);
+        if(n%3==1) return (int) Math.pow(3,n/3 - 1)*4;
+        return (int) Math.pow(3,n/3)*2;
     }
 }
