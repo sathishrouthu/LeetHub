@@ -30,18 +30,18 @@ class Solution {
         if(max1<0 && min2>0) return max1*min2;
         if(max2<0 && min1>0) return max2*min1;
         
-        int[][] dp = new int[n1+1][n2+1];
-        for(int j=0;j<=n2;j++) dp[n1][j]=0;
-        for(int i=0;i<=n1;i++) dp[i][n2]=0;
+        int[] front = new int[n2+1];
         
         for(int i=n1-1;i>=0;i--){
+            int[] curr = new int[n2+1];
             for(int j=n2-1;j>=0;j--){
-                int curr = nums1[i]*nums2[j]+dp[i+1][j+1];
-                int nexti = dp[i+1][j];
-                int nextj = dp[i][j+1];
-                dp[i][j] = Math.max(curr,Math.max(nexti,nextj));
+                int nextij = nums1[i]*nums2[j] + front[j+1];
+                int nexti = front[j];
+                int nextj = curr[j+1];
+                curr[j] = Math.max(nextij,Math.max(nexti,nextj));
             }
+            front=curr;
         }
-        return dp[0][0];
+        return front[0];
     }
 }
