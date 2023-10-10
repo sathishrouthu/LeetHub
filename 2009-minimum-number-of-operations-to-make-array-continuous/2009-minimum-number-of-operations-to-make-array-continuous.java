@@ -11,10 +11,11 @@ class Solution {
         int newArrLen = idx;
         System.out.println(idx);
         int ans=n;
+        int j=0;
         for(int i=0;i<newArrLen;i++){
             int left = newArr[i];
             int right = left+n-1;
-            int j = upperBound(newArr,right,newArrLen);
+            while(j<newArrLen && newArr[j]<=right) j++;
             int existingElements = j-i;
             ans = Math.min(ans,n-existingElements);
         }
