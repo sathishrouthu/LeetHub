@@ -8,7 +8,7 @@ class Solution {
             if(str.charAt(j)=='T') countTrue++;
             else countFalse++;
             int maxRepeated = Math.max(countTrue,countFalse);
-            while((j-i+1) - Math.max(countTrue,countFalse) > k){
+            while((j-i+1) - maxRepeated > k){
                 if(str.charAt(i)=='T') countTrue--;
                 else countFalse--;
                 i++;
