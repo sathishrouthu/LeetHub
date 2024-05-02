@@ -6,13 +6,13 @@ class Solution {
         int ans = 0;
         while(j<nums.length){
             if(nums[j]==0) count++;
-            while(count>k){
+            if(count>k){
                 if(nums[i]==0) count--;
                 i++;
             }
-            ans = Math.max(ans,j-i+1);
+            // ans = Math.max(ans,j-i+1);
             j++;
         }
-        return ans;
+        return j-i;
     }
 }
