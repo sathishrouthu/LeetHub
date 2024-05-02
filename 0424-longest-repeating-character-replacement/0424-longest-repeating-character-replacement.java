@@ -6,14 +6,13 @@ class Solution {
         int[] freq = new int[26];
         while(j < s.length()){
             maxRepeated = Math.max(maxRepeated,++freq[s.charAt(j)-'A']);
-            while( j-i+1 - maxRepeated > k){
+            if( j-i+1 - maxRepeated > k){
                 freq[s.charAt(i)-'A']--;
                 i++;
             }
-            ans = Math.max(ans,j-i+1);
             j++;
         }
-        return ans;
+        return j-i;
     }
 }
 
