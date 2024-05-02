@@ -1,27 +1,27 @@
 class Solution {
     public int minOperations(int[] nums) {
-        Arrays.sort(nums);
         int n = nums.length;
-        int[] newArr = new int[n];
+        Arrays.sort(nums);
+        int[] uniqueArr = new int[n];
         int idx=0;
-        for(int i=0;i<n;i++){
+        for(int i =0;i<n;i++){
             if(i>0 && nums[i]==nums[i-1]) continue;
-            newArr[idx++]=nums[i];
+            uniqueArr[idx++] = nums[i];
         }
-        int newArrLen = idx;
-        System.out.println(idx);
-        int ans=n;
-        int j=0;
-        for(int i=0;i<newArrLen;i++){
-            int left = newArr[i];
+        int uniqueLen = idx;
+        
+        int ans = n;
+        for(int i=0;i<uniqueLen;i++){
+            int left = uniqueArr[i];
             int right = left+n-1;
-            while(j<newArrLen && newArr[j]<=right) j++;
-            int existingElements = j-i;
-            ans = Math.min(ans,n-existingElements);
+            int upperBound = upperBound(uniqueArr,uniqueLen,right);
+            int existingElements = upperBound-i;
+            int requiredOperations =n-existingElements;
+            ans = Math.min(ans,requiredOperations);
         }
         return ans;
     }
-    private int upperBound(int[] arr,int k,int n){
+    public int upperBound(int[] arr,int n,int k){
         int l = 0;
         int h = n-1;
         while(l<=h){
