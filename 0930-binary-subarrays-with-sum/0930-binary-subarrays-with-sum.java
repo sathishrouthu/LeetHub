@@ -1,18 +1,25 @@
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-        return numSubarrayWithAtMostSumK(nums,goal)-numSubarrayWithAtMostSumK(nums,goal-1);
-    }
-    public int numSubarrayWithAtMostSumK(int[] nums, int k){
-        int n = nums.length;
-        int i = 0,j=0;
+        int i=0,j=0;
         int sum=0;
-        int count = 0;
-        for(;j<n;j++){
-            sum+= nums[j];
-            while(i<=j && sum>k){
-                sum-=nums[i++];
+        int n = nums.length;
+        int count=0;
+        int leadingZeros = 0;
+        while(j<n){
+            sum += nums[j];
+            while(i<j && (nums[i]==0 || sum>goal)){
+                if(nums[i]==1){
+                    leadingZeros=0;
+                }else{
+                    leadingZeros++;
+                }
+                
+                sum-=nums[i];
+                i++;
             }
-            count += j-i+1;
+            if(sum==goal)
+                count += 1+leadingZeros;
+            j++;
         }
         return count;
     }
