@@ -6,7 +6,7 @@ class Solution {
         int[] pow = new int[n];
         pow[0] = 1;
         for(int i=1;i<n;i++)
-            pow[i] = pow[i-1]*2%mod;
+            pow[i] = (pow[i-1]<<1)%mod;
         int j=0;
         int count = 0;
         for(int i=0;i<n;i++){
