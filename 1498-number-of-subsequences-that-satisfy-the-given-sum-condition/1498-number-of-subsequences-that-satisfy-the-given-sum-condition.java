@@ -7,15 +7,15 @@ class Solution {
         pow[0] = 1;
         for(int i=1;i<n;i++)
             pow[i] = (pow[i-1]<<1)%mod;
-        int j=0;
+        int i=0,j=n-1;
         int count = 0;
-        for(int i=0;i<n;i++){
-            j=i;
-            while(j<n && nums[i]+nums[j]<=target){
-                j++;
+        while(i<=j){
+            if(nums[i]+nums[j] <= target){
+                count = (count+pow[j-i])%mod;
+                i++;
+            }else{
+                j--;
             }
-            if(j>i)
-                count = ( count + pow[j-i-1] )%mod;
         }
         return count;
     }
