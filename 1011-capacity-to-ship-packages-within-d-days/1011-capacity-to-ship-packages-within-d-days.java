@@ -3,10 +3,8 @@ class Solution {
         int count = 1;
         int load = 0;
         for(int w : weights){
-            if(load+w <= capacity){
-                load += w;
-            }
-            else{
+            load += w;
+            if(load > capacity){
                 count++;
                 load = w;
             }
