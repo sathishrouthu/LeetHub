@@ -1,43 +1,38 @@
 class Solution {
-    int daysRequired(int[] weights,int cap){
-        int n = weights.length;
+    int daysRequired(int[] weights,int capacity){
+        int count = 1;
         int load = 0;
-        int days=1;
-        for(int i=0;i<n;i++){
-            if(load+weights[i]>cap){
-                days++;
-                load = weights[i];
+        for(int w : weights){
+            if(load+w <= capacity){
+                load += w;
             }
-            else
-                load+=weights[i];
+            else{
+                count++;
+                load = w;
+            }
         }
-        return days;
+        return count;
     }
     public int shipWithinDays(int[] weights, int days) {
-        // System.out.println(daysRequired(weights,10));
-        int l = weights[0];
-        int h = 0;
-        for(int i:weights){
-            l = Math.max(i,l);
-            h+=i;
+        int maxCapacity = 0;
+        int maxWeight = weights[0];
+        for(int i:weights) {
+            maxWeight = Math.max(maxWeight,i);
+            maxCapacity += i;
         }
+        if(days == 1) 
+            return maxCapacity;
+        int l = maxWeight,h=maxCapacity;
         while(l<=h){
             int mid = (l+h)>>1;
-            int d = daysRequired(weights,mid);
-            if(d<=days) h=mid-1;
-            else l=mid+1;
+            int daysRequired = daysRequired(weights,mid);
+            if(daysRequired > days){
+                l=mid+1;
+            }
+            else{
+                h=mid-1;
+            }
         }
         return l;
     }
 }
-
-
-// System.out.println()
-
-/*
-
-1 2 3 4 5 6 7 8 9
-d=2
-c=10;
-
-*/
